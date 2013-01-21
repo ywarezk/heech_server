@@ -11,7 +11,7 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-DATABASES = {
+'''DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': '',                      # Or path to database file if using sqlite3.
@@ -20,7 +20,7 @@ DATABASES = {
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
-}
+}'''
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -154,4 +154,5 @@ LOGGING = {
 
 # Parse database configuration from $DATABASE_URL
 import dj_database_url
+DATABASES={}
 DATABASES['default'] =  dj_database_url.config()
