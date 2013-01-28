@@ -1,1 +1,1 @@
-web: python heech_server/manage.py runserver 0.0.0.0:$PORT --noreload
+web: python heech_server/manage.py run_gunicorn -b "0.0.0.0:$PORT"
