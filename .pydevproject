@@ -6,7 +6,7 @@
 <key>DATABASE_UR</key>
 <value>postgres://postgres:housekitten4@localhost:5432/heech</value>
 <key>DJANGO_MANAGE_LOCATION</key>
-<value>manage.py</value>
+<value>heech_server/manage.py</value>
 <key>DJANGO_SETTINGS_MODULE</key>
 <value>heech_server.settings</value>
 </pydev_variables_property>
