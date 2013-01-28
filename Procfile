@@ -1,1 +1,1 @@
-web: python manage.py runserver 0.0.0.0:$PORT --noreload
+web: python heech_server/manage.py runserver 0.0.0.0:$PORT --noreload
