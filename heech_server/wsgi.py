@@ -1,5 +1,5 @@
 """
-WSGI config for heech_server project.
+WSGI config for heech project.
 
 This module contains the WSGI application used by Django's development server
 and any production WSGI deployments. It should expose a module-level variable
@@ -15,7 +15,7 @@ framework.
 """
 import os
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "heech_server.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "heech.settings")
 
 # This application object is used by any WSGI server configured to use this
 # file. This includes Django's development server, if the WSGI_APPLICATION
