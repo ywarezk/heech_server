@@ -102,7 +102,7 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'heech_server.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = 'heech_server.wsgi.application'
+#WSGI_APPLICATION = 'heech_server.wsgi.application'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
