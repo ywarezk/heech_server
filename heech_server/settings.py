@@ -124,6 +124,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'gunicorn',
     'south',
+    'heech_server_app',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -159,3 +160,6 @@ LOGGING = {
 import dj_database_url
 DATABASES={}
 DATABASES['default'] =  dj_database_url.config()
+
+#configure the user profile
+AUTH_PROFILE_MODULE = 'heech_server_app.UserProfile'
