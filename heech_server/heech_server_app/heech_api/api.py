@@ -31,8 +31,8 @@ class HeechAuthorization(DjangoAuthorization):
     '''
     authorization class objects with owner function only the owner can view them
     '''
-    def is_authorized(self, request, object):
-        return super(DjangoAuthorization, self).is_authorized(request, object)
+    def is_authorized(self, request, obj=None):
+        return super(DjangoAuthorization, self).is_authorized(request, obj)
 
     def apply_limits(self, request, object_list):
         if request == None:
