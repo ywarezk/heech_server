@@ -2,31 +2,42 @@
 # import statments
 #===============================================================================
 
-from django.conf.urls import patterns, include, url
 from django.conf import settings
+from django.conf.urls import patterns, include, url
+from django.contrib import admin
+from heech_server.heech_server_app.heech_api.api import UserProfile,\
+    UserProfileResource
+from tastypie.api import Api
 
 #===============================================================================
 # end imports
 #===============================================================================
 
-# Uncomment the next two lines to enable the admin:
-from django.contrib import admin
+#===============================================================================
+# begin url definition
+#===============================================================================
+
+#enable admin
 admin.autodiscover()
 
+#register for tastypie api
+v1_api = Api(api_name='v1')
+v1_api.register(UserProfileResource())
+
+#url define
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'heech_server.views.home', name='home'),
-    # url(r'^heech_server/', include('heech_server.foo.urls')),
-
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
-    # Uncomment the next line to enable the admin:
      url(r'^admin/', include(admin.site.urls)),
      (r'^grappelli/', include('grappelli.urls')),
+     (r'^api/', include(v1_api.urls)),
 )
 
 if not settings.DEBUG:
     urlpatterns += patterns('',
         (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
     )
+
+#===============================================================================
+# end url definition
+#===============================================================================
+
+

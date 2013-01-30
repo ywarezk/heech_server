@@ -128,6 +128,7 @@ INSTALLED_APPS = (
     'gunicorn',
     'south',
     'heech_server_app',
+    'tastypie',
 )
 
 # A sample logging configuration. The only tangible logging
