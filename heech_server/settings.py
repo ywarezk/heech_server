@@ -2,6 +2,8 @@
 import os
 os.environ.setdefault('LANG','en_US')
 
+SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
+
 DEBUG = (os.environ['HEECH_ENV_DEBUG'] == 'TRUE')
 TEMPLATE_DEBUG = DEBUG
 
@@ -164,3 +166,9 @@ DATABASES['default'] =  dj_database_url.config()
 
 #configure the user profile
 AUTH_PROFILE_MODULE = 'heech_server_app.UserProfile'
+
+STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+
+AWS_ACCESS_KEY_ID = os.environ['HEECH_ENV_AWS_ACCESS_KEY_ID']
+AWS_SECRET_ACCESS_KEY = os.environ['HEECH_ENV_AWS_SECRET_ACCESS_KEY']
+AWS_STORAGE_BUCKET_NAME = os.environ['HEECH_ENV_AWS_STORAGE_BUCKET_NAME']
