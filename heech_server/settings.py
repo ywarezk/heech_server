@@ -62,7 +62,8 @@ STATIC_ROOT = ''
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
-STATIC_URL = '/static/'
+STATIC_URL = os.environ['HEECH_ENV_STATIC_URL']
+ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
