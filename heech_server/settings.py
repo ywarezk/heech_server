@@ -2,7 +2,7 @@
 import os
 os.environ.setdefault('LANG','en_US')
 
-DEBUG = True
+DEBUG = (os.environ['HEECH_ENV_DEBUG'] == 'TRUE')
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
