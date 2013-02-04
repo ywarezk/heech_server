@@ -1,0 +1,38 @@
+[
+    {
+        "pk": 1, 
+        "model": "auth.user", 
+        "fields": {
+            "username": "yariv", 
+            "first_name": "Yariv", 
+            "last_name": "Katz", 
+            "is_active": true, 
+            "is_superuser": false, 
+            "is_staff": false, 
+            "last_login": "2013-02-04T13:29:20.436Z", 
+            "groups": [], 
+            "user_permissions": [], 
+            "password": "pbkdf2_sha256$10000$L11CUwx9mSeY$v0rlEztVI/xGyw6jWin769u5Yydm/1fx7w/10JKCjjE=", 
+            "email": "yariv@purplebit.com", 
+            "date_joined": "2013-02-04T13:29:20.436Z"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "auth.user", 
+        "fields": {
+            "username": "ofir", 
+            "first_name": "Ofir", 
+            "last_name": "Ovadia", 
+            "is_active": true, 
+            "is_superuser": false, 
+            "is_staff": false, 
+            "last_login": "2013-02-04T13:29:20.604Z", 
+            "groups": [], 
+            "user_permissions": [], 
+            "password": "pbkdf2_sha256$10000$jOcJ6iIUHIhM$r6gQAQ5um8NGdKry9mOYh/dbVdpbEdI5h1a1NUuS/Tc=", 
+            "email": "ofir@purplebit.com", 
+            "date_joined": "2013-02-04T13:29:20.604Z"
+        }
+    }
+]

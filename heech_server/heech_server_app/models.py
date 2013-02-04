@@ -18,6 +18,7 @@ from tastypie.models import create_api_key
 # end imports
 #===============================================================================
 
+
 #===============================================================================
 # begin heech models
 #===============================================================================
@@ -91,7 +92,7 @@ class Drive(NerdeezModel):
     '''
     this model will save the users hitchiking needs
     '''
-    user_profile = models.ForeignKey(UserProfile, unique=True)
+    user_profile = models.ForeignKey(UserProfile)
     drive_date = models.DateTimeField(default=lambda: datetime.datetime.now().replace(microsecond=0))
     origin = models.CharField(max_length=100, blank=True, null=True , default="")
     destination = models.CharField(max_length=100, blank=True, null=True , default="")
@@ -117,11 +118,24 @@ class Drive(NerdeezModel):
 
 #when creating user create also the userprofile
 def create_user_profile(sender, instance, created, **kwargs):
-    if created:
+    if created and not kwargs.get('raw', False): 
         UserProfile.objects.get_or_create(user=instance)
+        
+#when creating user create also the user settings
+def create_user_setting(sender, instance, created, **kwargs):
+    if created and not kwargs.get('raw', False): 
+        UserSetting.objects.get_or_create(user_profile=instance)
+        
+#when creating user create api key for the user
+def nerdeez_create_api_key(sender, instance, created, **kwargs):
+    if created and not kwargs.get('raw', False):
+        dictCreatedInstance = {'created': created, 'instance': instance}
+        dictNewKwargs = dict(dictCreatedInstance.items() + kwargs.items())
+        create_api_key(sender, **dictNewKwargs)
 
 models.signals.post_save.connect(create_user_profile, sender=User, dispatch_uid="create_user_profile_on_user_create")
-models.signals.post_save.connect(create_api_key, sender=User)
+models.signals.post_save.connect(create_user_setting, sender=UserProfile, dispatch_uid="create_user_settings_on_user_create")
+models.signals.post_save.connect(nerdeez_create_api_key, sender=User, dispatch_uid="create_tasty_api_key_on_user_create")
 
 #===============================================================================
 # end signals

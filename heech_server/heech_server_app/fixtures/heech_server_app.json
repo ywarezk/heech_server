@@ -1,0 +1,69 @@
+[
+    {
+        "pk": 1, 
+        "model": "heech_server_app.userprofile", 
+        "fields": {
+            "first_name": "", 
+            "last_name": "", 
+            "modified_data": "2013-02-04T13:29:21.607Z", 
+            "gender": "", 
+            "facebook_link": "", 
+            "facebook_username": "", 
+            "creation_date": "2013-02-04T13:29:20Z", 
+            "user": 1, 
+            "facebook_id": ""
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "heech_server_app.userprofile", 
+        "fields": {
+            "first_name": "", 
+            "last_name": "", 
+            "modified_data": "2013-02-04T13:29:21.616Z", 
+            "gender": "", 
+            "facebook_link": "", 
+            "facebook_username": "", 
+            "creation_date": "2013-02-04T13:29:20Z", 
+            "user": 2, 
+            "facebook_id": ""
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "heech_server_app.usersetting", 
+        "fields": {
+            "modified_data": "2013-02-04T13:29:20.569Z", 
+            "user_profile": 1, 
+            "is_notify_similar_driver": true, 
+            "creation_date": "2013-02-04T13:29:20Z", 
+            "search_radius": 0, 
+            "is_notify_similar_passenger": true
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "heech_server_app.usersetting", 
+        "fields": {
+            "modified_data": "2013-02-04T13:29:20.619Z", 
+            "user_profile": 2, 
+            "is_notify_similar_driver": true, 
+            "creation_date": "2013-02-04T13:29:20Z", 
+            "search_radius": 0, 
+            "is_notify_similar_passenger": true
+        }
+    },
+    {
+        "pk": 1, 
+        "model": "heech_server_app.drive", 
+        "fields": {
+            "origin": "haifa", 
+            "modified_data": "2013-02-04T15:40:14Z", 
+            "user_profile": 1, 
+            "drive_date": "2013-02-04T15:40:14Z", 
+            "price": "5.000", 
+            "destination": "tel aviv", 
+            "creation_date": "2013-02-04T15:40:14Z"
+        }
+    }
+]

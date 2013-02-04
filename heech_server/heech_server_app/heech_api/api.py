@@ -17,9 +17,20 @@ from tastypie.authentication import ApiKeyAuthentication
 from tastypie.authorization import DjangoAuthorization
 from tastypie.exceptions import BadRequest
 import json
+from tastypie import fields
 
 #===============================================================================
 # end imports
+#===============================================================================
+
+#===============================================================================
+# begin constants
+#===============================================================================
+
+API_URL = '/api/v1/'
+
+#===============================================================================
+# end constants
 #===============================================================================
 
 
@@ -59,6 +70,11 @@ class NerdeezResource(ModelResource):
         authorization = HeechAuthorization()
         allowed_methods = ['get']
         always_return_data = True
+        
+    def obj_create(self, bundle, request=None, **kwargs):
+        bundle.data['user_profile'] = API_URL + 'userprofile/' + str(request.user.get_profile().id) + '/'
+        return super(NerdeezResource, self).obj_create(bundle, request, **kwargs)
+        
 
 class UserProfileResource(NerdeezResource):
     '''
@@ -79,6 +95,7 @@ class DriveResource(NerdeezResource):
     '''
     the rest api for the users drives requests
     '''
+    user_profile = fields.ToOneField(UserProfileResource, 'user_profile', full=True)
     class Meta(NerdeezResource.Meta):
         queryset = Drive.objects.all()
         allowed_methods = ['get', 'put', 'post', 'delete']
@@ -91,7 +108,8 @@ class DriveResource(NerdeezResource):
             for drive in object_list:
                 if drive.user_profile.user.username != request.user.username:
                     raise BadRequest(json.dumps({'errors' : {'Authorization' : ('You are not authorized to modify/delete this record',)}, }))
-                    return  
+                    return 
+        return object_list 
 
 #===============================================================================
 # end rest resources

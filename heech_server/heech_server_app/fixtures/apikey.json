@@ -1,0 +1,20 @@
+[
+    {
+        "pk": 1, 
+        "model": "tastypie.apikey", 
+        "fields": {
+            "user": 1, 
+            "key": "12345678", 
+            "created": "2013-02-04T13:29:20.580Z"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "tastypie.apikey", 
+        "fields": {
+            "user": 2, 
+            "key": "12345678", 
+            "created": "2013-02-04T13:29:20.621Z"
+        }
+    }
+]
