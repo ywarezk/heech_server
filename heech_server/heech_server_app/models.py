@@ -72,9 +72,6 @@ class UserProfile(NerdeezModel):
     gender = models.CharField(max_length=10, blank=True, null=True , default="")
     facebook_username = models.CharField(max_length=50, blank=True, null=True , default="")
     facebook_link = models.CharField(max_length=200, blank=True, null=True , default="")
-    hair_color = models.CharField(max_length=30, default='black', choices=hair_color_choices)
-    skin_color = models.CharField(max_length=30, default='white', choices=skin_color_choices)
-    eye_color = models.CharField(max_length=30, default='black', choices=eye_color_choices)
     
     def __unicode__(self):
         '''
