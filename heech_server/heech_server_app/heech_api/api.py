@@ -12,12 +12,12 @@ the rest api is defined here
 
 from tastypie.resources import ModelResource
 from heech_server_app.models import *
-from heech_server.heech_server_app.models import UserProfile, UserSetting, Drive
+from heech_server.heech_server_app.models import UserProfile
 from tastypie.authentication import ApiKeyAuthentication
 from tastypie.authorization import DjangoAuthorization
 from tastypie.exceptions import BadRequest
 import json
-from tastypie import fields
+#from tastypie import fields
 
 #===============================================================================
 # end imports
@@ -83,33 +83,33 @@ class UserProfileResource(NerdeezResource):
     class Meta(NerdeezResource.Meta):
         queryset = UserProfile.objects.all()
         
-class UserSettingResource(NerdeezResource):
-    '''
-    the rest api for the user settings
-    '''
-    class Meta(NerdeezResource.Meta):
-        queryset = UserSetting.objects.all()
-        allowed_methods = ['get', 'put']
-        
-class DriveResource(NerdeezResource):
-    '''
-    the rest api for the users drives requests
-    '''
-    user_profile = fields.ToOneField(UserProfileResource, 'user_profile', full=True)
-    class Meta(NerdeezResource.Meta):
-        queryset = Drive.objects.all()
-        allowed_methods = ['get', 'put', 'post', 'delete']
-        
-    def apply_authorization_limits(self, request, object_list):
-        '''
-        only the owner can delete or update
-        '''
-        if request.method in ['PUT', 'DELETE']:
-            for drive in object_list:
-                if drive.user_profile.user.username != request.user.username:
-                    raise BadRequest(json.dumps({'errors' : {'Authorization' : ('You are not authorized to modify/delete this record',)}, }))
-                    return 
-        return object_list 
+#class UserSettingResource(NerdeezResource):
+#    '''
+#    the rest api for the user settings
+#    '''
+#    class Meta(NerdeezResource.Meta):
+#        queryset = UserSetting.objects.all()
+#        allowed_methods = ['get', 'put']
+#        
+#class DriveResource(NerdeezResource):
+#    '''
+#    the rest api for the users drives requests
+#    '''
+#    user_profile = fields.ToOneField(UserProfileResource, 'user_profile', full=True)
+#    class Meta(NerdeezResource.Meta):
+#        queryset = Drive.objects.all()
+#        allowed_methods = ['get', 'put', 'post', 'delete']
+#        
+#    def apply_authorization_limits(self, request, object_list):
+#        '''
+#        only the owner can delete or update
+#        '''
+#        if request.method in ['PUT', 'DELETE']:
+#            for drive in object_list:
+#                if drive.user_profile.user.username != request.user.username:
+#                    raise BadRequest(json.dumps({'errors' : {'Authorization' : ('You are not authorized to modify/delete this record',)}, }))
+#                    return 
+#        return object_list 
 
 #===============================================================================
 # end rest resources

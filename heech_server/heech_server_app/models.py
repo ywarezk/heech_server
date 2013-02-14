@@ -12,7 +12,7 @@ contains the db models
 from django.db import models
 import datetime
 from django.contrib.auth.models import User
-from decimal import Decimal
+#from decimal import Decimal
 from tastypie.models import create_api_key
 #===============================================================================
 # end imports
@@ -39,6 +39,32 @@ class UserProfile(NerdeezModel):
     this model will contain the user account on heech
     it will save all the users data from facebook and will be saved on registration
     '''
+    #===========================================================================
+    # begin choices definition
+    #===========================================================================
+    hair_color_choices=(
+                        ('black'),
+                        ('blond'),
+                        ('brunette'),
+                        ('red'),
+                        )
+    skin_color_choices=(
+                        ('white'),
+                        ('black'),
+                        ('JLo'),
+                        ('Hispanic'),
+                        )
+    eye_color_choices=(
+                        ('black'),
+                        ('brown'),
+                        ('blue'),
+                        ('green'),
+                        )
+    
+    #===========================================================================
+    # end choices definition
+    #===========================================================================
+    
     user = models.OneToOneField(User, unique=True, related_name='profile')
     facebook_id = models.CharField(max_length = 255, null = True, blank = True, default="")
     first_name = models.CharField(max_length=30, blank=True, null=True , default="")
@@ -46,6 +72,9 @@ class UserProfile(NerdeezModel):
     gender = models.CharField(max_length=10, blank=True, null=True , default="")
     facebook_username = models.CharField(max_length=50, blank=True, null=True , default="")
     facebook_link = models.CharField(max_length=200, blank=True, null=True , default="")
+    hair_color = models.CharField(max_length=30, default='black', choices=hair_color_choices)
+    skin_color = models.CharField(max_length=30, default='white', choices=skin_color_choices)
+    eye_color = models.CharField(max_length=30, default='black', choices=eye_color_choices)
     
     def __unicode__(self):
         '''
@@ -60,53 +89,53 @@ class UserProfile(NerdeezModel):
         return self.user.username
     
     
-class UserSetting(NerdeezModel):
-    '''
-    this model will contain application setting for every user
-    all new user will have a default settings
-    '''
-    search_radius_choices = (
-                                 (0, 'Unlimited'),
-                                 (1, 'My friends'),
-                                 (2, 'Friends of friends'),
-                            )
-    user_profile = models.ForeignKey(UserProfile, unique=True)
-    search_radius = models.IntegerField(default=0, choices=search_radius_choices)
-    is_notify_similar_passenger = models.BooleanField(default=True) #im a driver - notify me when there is a passenger i can collect
-    is_notify_similar_driver = models.BooleanField(default=True) # im a passenger notify me if there is a driver going to the same direction
-    
-    def __unicode__(self):
-        '''
-        what will be printed in the admin
-        '''
-        return u'%s %s Settings' %(self.user_profile.first_name, self.user_profile.last_name)
-    
-    def owner(self):
-        '''
-        security only owner can view settings
-        '''
-        return self.user_profile.user.username
-
-    
-class Drive(NerdeezModel):
-    '''
-    this model will save the users hitchiking needs
-    '''
-    user_profile = models.ForeignKey(UserProfile)
-    drive_date = models.DateTimeField(default=lambda: datetime.datetime.now().replace(microsecond=0))
-    origin = models.CharField(max_length=100, blank=True, null=True , default="")
-    destination = models.CharField(max_length=100, blank=True, null=True , default="")
-    price = models.DecimalField(max_digits = 6, decimal_places = 3,default = Decimal("0.00"))
-    
-    def __unicode__(self):
-        '''
-        what will be printed in the admin
-        '''
-        return 'User: %s %s Wants to go from: %s to: %s' % (self.user_profile.first_name, 
-                                                            self.user_profile.last_name, 
-                                                            self.origin, 
-                                                            self.destination)
-        
+#class UserSetting(NerdeezModel):
+#    '''
+#    this model will contain application setting for every user
+#    all new user will have a default settings
+#    '''
+#    search_radius_choices = (
+#                                 (0, 'Unlimited'),
+#                                 (1, 'My friends'),
+#                                 (2, 'Friends of friends'),
+#                            )
+#    user_profile = models.ForeignKey(UserProfile, unique=True)
+#    search_radius = models.IntegerField(default=0, choices=search_radius_choices)
+#    is_notify_similar_passenger = models.BooleanField(default=True) #im a driver - notify me when there is a passenger i can collect
+#    is_notify_similar_driver = models.BooleanField(default=True) # im a passenger notify me if there is a driver going to the same direction
+#    
+#    def __unicode__(self):
+#        '''
+#        what will be printed in the admin
+#        '''
+#        return u'%s %s Settings' %(self.user_profile.first_name, self.user_profile.last_name)
+#    
+#    def owner(self):
+#        '''
+#        security only owner can view settings
+#        '''
+#        return self.user_profile.user.username
+#
+#    
+#class Drive(NerdeezModel):
+#    '''
+#    this model will save the users hitchiking needs
+#    '''
+#    user_profile = models.ForeignKey(UserProfile)
+#    drive_date = models.DateTimeField(default=lambda: datetime.datetime.now().replace(microsecond=0))
+#    origin = models.CharField(max_length=100, blank=True, null=True , default="")
+#    destination = models.CharField(max_length=100, blank=True, null=True , default="")
+#    price = models.DecimalField(max_digits = 6, decimal_places = 3,default = Decimal("0.00"))
+#    
+#    def __unicode__(self):
+#        '''
+#        what will be printed in the admin
+#        '''
+#        return 'User: %s %s Wants to go from: %s to: %s' % (self.user_profile.first_name, 
+#                                                            self.user_profile.last_name, 
+#                                                            self.origin, 
+#                                                            self.destination)
+#        
 
 #===============================================================================
 # end heech models
@@ -122,9 +151,9 @@ def create_user_profile(sender, instance, created, **kwargs):
         UserProfile.objects.get_or_create(user=instance)
         
 #when creating user create also the user settings
-def create_user_setting(sender, instance, created, **kwargs):
-    if created and not kwargs.get('raw', False): 
-        UserSetting.objects.get_or_create(user_profile=instance)
+#def create_user_setting(sender, instance, created, **kwargs):
+#    if created and not kwargs.get('raw', False): 
+#        UserSetting.objects.get_or_create(user_profile=instance)
         
 #when creating user create api key for the user
 def nerdeez_create_api_key(sender, instance, created, **kwargs):
@@ -134,7 +163,7 @@ def nerdeez_create_api_key(sender, instance, created, **kwargs):
         create_api_key(sender, **dictNewKwargs)
 
 models.signals.post_save.connect(create_user_profile, sender=User, dispatch_uid="create_user_profile_on_user_create")
-models.signals.post_save.connect(create_user_setting, sender=UserProfile, dispatch_uid="create_user_settings_on_user_create")
+#models.signals.post_save.connect(create_user_setting, sender=UserProfile, dispatch_uid="create_user_settings_on_user_create")
 models.signals.post_save.connect(nerdeez_create_api_key, sender=User, dispatch_uid="create_tasty_api_key_on_user_create")
 
 #===============================================================================
