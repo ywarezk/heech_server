@@ -10,7 +10,7 @@ will hold the admin interface models
 # begin imports
 #===============================================================================
 from django.contrib import admin
-from models import *
+from models import UserProfile, University
 #===============================================================================
 # end imports
 #===============================================================================
@@ -22,6 +22,9 @@ from models import *
 class UserProfileAdmin(admin.ModelAdmin):
     pass
 
+class UniversityAdmin(admin.ModelAdmin):
+    pass
+
 #===============================================================================
 # end admin models
 #===============================================================================
@@ -31,6 +34,7 @@ class UserProfileAdmin(admin.ModelAdmin):
 #===============================================================================
 
 admin.site.register(UserProfile, UserProfileAdmin)
+admin.site.register(University, UserProfileAdmin)
 
 #===============================================================================
 # end admin site registration

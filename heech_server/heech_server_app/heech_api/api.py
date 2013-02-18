@@ -12,7 +12,7 @@ the rest api is defined here
 
 from tastypie.resources import ModelResource
 from heech_server_app.models import *
-from heech_server.heech_server_app.models import UserProfile
+from heech_server.heech_server_app.models import UserProfile, University
 from tastypie.authentication import ApiKeyAuthentication
 from tastypie.authorization import DjangoAuthorization
 from tastypie.exceptions import BadRequest
@@ -82,6 +82,14 @@ class UserProfileResource(NerdeezResource):
     '''
     class Meta(NerdeezResource.Meta):
         queryset = UserProfile.objects.all()
+        
+class UniversityResource(NerdeezResource):
+    '''
+    the rest api for the  university resource
+    '''
+    class Meta(NerdeezResource.Meta):
+        queryset = University.objects.all()
+        allowed_methods = ['get', 'put', 'post']
         
 #class UserSettingResource(NerdeezResource):
 #    '''

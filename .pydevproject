@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?eclipse-pydev version="1.0"?>
-
-<pydev_project>
+<?eclipse-pydev version="1.0"?><pydev_project>
 <pydev_variables_property name="org.python.pydev.PROJECT_VARIABLE_SUBSTITUTION">
 <key>DATABASE_UR</key>
 <value>postgres://postgres:housekitten4@localhost:5432/heech</value>
@@ -14,5 +12,5 @@
 <path>/heech</path>
 </pydev_pathproperty>
 <pydev_property name="org.python.pydev.PYTHON_PROJECT_VERSION">python 2.7</pydev_property>
-<pydev_property name="org.python.pydev.PYTHON_PROJECT_INTERPRETER">heech</pydev_property>
+<pydev_property name="org.python.pydev.PYTHON_PROJECT_INTERPRETER">classroom-server</pydev_property>
 </pydev_project>

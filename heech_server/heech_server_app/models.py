@@ -39,31 +39,7 @@ class UserProfile(NerdeezModel):
     this model will contain the user account on heech
     it will save all the users data from facebook and will be saved on registration
     '''
-    #===========================================================================
-    # begin choices definition
-    #===========================================================================
-    hair_color_choices=(
-                        ('black'),
-                        ('blond'),
-                        ('brunette'),
-                        ('red'),
-                        )
-    skin_color_choices=(
-                        ('white'),
-                        ('black'),
-                        ('JLo'),
-                        ('Hispanic'),
-                        )
-    eye_color_choices=(
-                        ('black'),
-                        ('brown'),
-                        ('blue'),
-                        ('green'),
-                        )
     
-    #===========================================================================
-    # end choices definition
-    #===========================================================================
     
     user = models.OneToOneField(User, unique=True, related_name='profile')
     facebook_id = models.CharField(max_length = 255, null = True, blank = True, default="")
@@ -84,6 +60,24 @@ class UserProfile(NerdeezModel):
         security only owner can view settings
         '''
         return self.user.username
+    
+class University(NerdeezModel):
+    '''
+    this model will save the list of universities
+    '''
+    
+    title = models.CharField(max_length=100, null=True, blank=True, default="")
+    description = models.CharField(max_length=255, null=True, blank=True, default="")
+    country = models.CharField(max_length=100, null=True, blank=True, default="")
+    web_site = models.CharField(max_length=255, null=True, blank=True, default="")
+    image = models.CharField(max_length=255, null=True, blank=True, default="")
+    local_title = models.CharField(max_length=100, null=True, blank=True, default="")
+    
+    def __unicode__(self):
+        '''
+        what will be printed in the admin
+        '''
+        return u'%s' % self.title
     
     
 #class UserSetting(NerdeezModel):
